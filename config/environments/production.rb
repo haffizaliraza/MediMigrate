@@ -15,7 +15,7 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.hosts << "8080-cs-ae0a252b-30cf-490e-8ce1-577d0374e5e6.cs-asia-southeast1-bool.cloudshell.dev"
+  config.hosts << "web-production-4987.up.railway.app"
 
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]

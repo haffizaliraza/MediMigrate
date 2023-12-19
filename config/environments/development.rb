@@ -16,7 +16,7 @@ Rails.application.configure do
 
   # Enable server timing
   config.server_timing = true
-  config.hosts << "8080-cs-ae0a252b-30cf-490e-8ce1-577d0374e5e6.cs-asia-southeast1-bool.cloudshell.dev"
+  config.hosts << "web-production-4987.up.railway.app"
 
 
   # Enable/disable caching. By default caching is disabled.
