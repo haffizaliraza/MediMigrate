@@ -1,0 +1,21 @@
+<%= render 'layouts/content_header', content_header: 'Courses', path: nil %>
+<hr class=" mt-0 mx-3">
+<div class="content">
+  <ul class="nav nav-tabs" id="coursesTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="all-courses-tab" data-bs-toggle="tab" data-bs-target="#all-courses" type="button" role="tab" aria-controls="all-courses" aria-selected="true">All Courses</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="purchased-tab" data-bs-toggle="tab" data-bs-target="#purchased" type="button" role="tab" aria-controls="purchased" aria-selected="false">Purchased Courses</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="unpurchased-tab" data-bs-toggle="tab" data-bs-target="#unpurchased" type="button" role="tab" aria-controls="unpurchased" aria-selected="false">Un-Purchased Courses</button>
+    </li>
+  </ul>
+</div>
+
+<div class="tab-content" id="coursesTabContent">
+  <%= render partial: 'tab_content', locals: { courses: @courses, current_tab: 'all-courses', tab_id: 'all-courses' } %>
+  <%= render partial: 'tab_content', locals: { courses: @student_purchased, current_tab: 'purchased', tab_id: 'purchased' } %>
+  <%= render partial: 'tab_content', locals: { courses: @not_purchased, current_tab: 'unpurchased', tab_id: 'unpurchased' } %>
+</div>

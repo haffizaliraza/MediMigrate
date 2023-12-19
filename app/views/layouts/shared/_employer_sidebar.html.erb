@@ -1,0 +1,9 @@
+<% valid_keys = ['Dashboard', 'Courses', 'Jobs', 'Job Applications'] %>
+
+<% nav_item.each do |key, value| %>
+  <% if valid_keys.include?(key) %>
+    <li class="nav-item <%= 'active' if active_path?(value[:path_name])%>">
+      <%= render 'layouts/shared/nav_item', path: value[:path], icon: value[:icon], title: value[:title] %>
+    </li>
+  <% end %>
+<% end %>

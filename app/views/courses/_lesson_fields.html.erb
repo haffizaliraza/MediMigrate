@@ -1,0 +1,41 @@
+<div class="nested-fields border m-3 p-3" data-controller='lesson-toggle'>
+  <h2>Lessons</h2>
+  <div class="btn-group" role="group" data-action='click->lesson-toggle#toggle'>
+    <button type="button" value="text" class="<%= 'active' if f.object.type == 'Text' %> btn btn-secondary">Text</button>
+    <button type="button" value="video" class="<%= 'active' if f.object.type == 'Video' %> btn btn-secondary">Video</button>
+    <button type="button" value="interactive_video" class="<%= 'active' if f.object.type == 'InteractiveVideo' %> btn btn-secondary">Zoom</button>
+  </div>
+
+  <%= f.hidden_field :type, value: f.object.type, data: { lesson_toggle_target: 'typeField' } %>
+  <div class="col-sm-7 mb-3 form-group mt-3">
+    <%= f.label :title %><span class="text-danger">*</span>
+    <%= f.text_field :title, autofocus: true, autocomplete: "name", class:'form-control', placeholder:'Enter Name' %>
+    <span class="text-danger"><%= f.object.errors.full_messages_for(:title).join(', ') if f.object.present? %></span>
+  </div>
+
+  <div class="col-sm-7 mb-3 form-group <%= 'd-none' if ['InteractiveVideo', 'Video'].include?(f.object.type) %>" data-lesson-toggle-target='textLesson'>
+    <%= f.label :content %>
+    <%= f.rich_text_area :content, placeholder:'Enter Description', class: 'form-control' %>
+  </div>
+
+  <div class="col-sm-7 mb-3 form-group <%= 'd-none' if ['InteractiveVideo', 'Text'].include?(f.object.type) %>" data-lesson-toggle-target='videoLesson'>
+    <%= f.label :file %>
+    <%= f.file_field :file, placeholder:'Upload Video', class: 'form-control' %>
+    <% if f.object.type == 'Video' && f.object.file.attached? %>
+      <% if f.object.file.content_type.include?('image') %>
+        <%= image_tag f.object.file, class: 'video-lesson' %>
+      <% else %>
+        <%= video_tag url_for(f.object.file), controls: true, class: 'video-lesson' %>
+      <% end %>
+    <% end %>
+    <span class="text-danger"><%= f.object.errors.full_messages_for(:file).join(', ') if f.object.present? %></span>
+  </div>
+
+  <div class="col-sm-7 mb-3 form-group <%= 'd-none' if ['Video', 'Text'].include?(f.object.type) %>" data-lesson-toggle-target='interactiveVideoLesson'>
+    <%= f.label :url %>
+    <%= f.text_field :url, autofocus: true, autocomplete: "url", class:'form-control', placeholder:'Enter URL' %>
+    <span class="text-danger"><%= f.object.errors.full_messages_for(:url).join(', ') if f.object.present? %></span>
+  </div>
+
+  <%= link_to_remove_association 'Remove Lesson', f, class: 'btn btn-danger' %>
+</div>

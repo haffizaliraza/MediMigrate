@@ -1,0 +1,7 @@
+<ol class="list-group list-group-numbered">
+  <% purchased_course.course.chapters.each_with_index do |chapter, index| %>
+    <%= link_to course_path(id: purchased_course.course.id, chapter_id: chapter.id), class: "nav-link #{chapter_completed(purchased_course, chapter.id, index) ? 'bg-secondary text-light' : ''} list-group-item #{active_chapter(chapter.id, index) ? 'active' : ''}" do %>
+      <%= chapter.title %>
+    <% end %>
+  <% end %>
+</ol>

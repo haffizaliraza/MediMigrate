@@ -1,0 +1,20 @@
+<div class="nested-fields shadow rounded border my-3 p-3">
+  <h2>Chapters</h2>
+  <div class="col-sm-7 mb-3 form-group mt-3">
+    <%= f.label :title %><span class="text-danger">*</span>
+    <%= f.text_field :title, autofocus: true, autocomplete: "name", class:'form-control', placeholder:'Enter Name' %>
+    <span class="text-danger"><%= f.object.errors.full_messages_for(:title).join(', ') if f.object.present? %></span>
+  </div>
+
+  <div class="col-sm-12 mb-3 form-group mt-3">
+    <%= f.fields_for :lessons do |lesson_form| %>
+      <%= render 'courses/lesson_fields', f: lesson_form %>
+    <% end %>
+  </div>
+  <div class="links"></div>
+  <div class="d-flex">
+    <%= link_to_add_association "Add Lessons", f, :lessons, class:'btn btn-success mx-2' %>
+
+    <%= link_to_remove_association 'Remove Chapter', f, class: 'btn btn-danger' %>
+  </div>
+</div>

@@ -1,0 +1,201 @@
+@import "bootstrap";
+@import "font-awesome";
+@import "./actiontext.css";
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+
+body {
+  margin: 0;
+  font-size: 16px;
+  font-family: sans-serif;
+  min-height: 100%;
+  grid-template-columns: 1fr min(100%)
+}
+.wrapper {
+  display: flex;
+  .main-header {
+    border: none;
+    display: flex;
+    padding: 10px;
+    background-color: #a7b1c2;
+  }
+  .content-wrapper {
+    background: none;
+    margin-left: 250px;
+    min-height: 100vh;
+    transition: all ease 0.3s;
+    width: 100%;
+  }
+  .main-sidebar {
+    border: none;
+    border-radius: 0;
+    position: fixed;
+    height: 100%;
+    transition: all ease 0.3s;
+    z-index: 999;
+    width: 250px;
+    background-color: #645e5e;
+    .brand-link {
+      padding: 15px 25px;
+      background-color: lightslategrey;
+      .profile-element {
+        .img-circle {
+          border-radius: 50%;
+        }
+        img {
+          width: 90px;
+        }
+      }
+    }
+    .nav-sidebar {
+      margin: 0;
+      padding: 0;
+      li {
+        a {
+          border-radius: 0;
+          color: #a7b1c2;
+          display: flex;
+          font-size:17px;
+          margin-bottom: 0.2rem;
+          padding: 0.5rem 1rem;
+          text-decoration: none;
+          svg {
+            font-size: 22px;
+            margin-right: 10px;
+            width: 25px;
+          }
+          &:hover {
+            color: #fff;
+            background: lightslategrey;
+          }
+        }
+        &.active {
+          a {
+            color: #fff;
+            background: lightslategrey;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width:479px) {
+    .content-wrapper {
+      margin-left: 0;
+      .content-header {
+        h2{
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+.login-wrapper {
+  align-items:center;
+  background: #f5f6f6;
+  display: flex;
+  height:100vh;
+}
+
+.required {
+  abbr {
+    color: red;
+    text-decoration: none;
+  }
+}
+label:not(.form-check-label,.collection_radio_buttons), legend {
+  font-weight: bold;
+
+}
+.job_job_type {
+  span {
+    display: flex;
+  }
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+.video-lesson {
+  width: 400px;
+  height: 400px;
+  margin-top: 10px;
+}
+
+.truncate-3-lines {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.video-thumbnail {
+  width: 300px;
+}
+
+.course-detail {
+  position: relative;
+  .title-img {
+    img {
+      width: 100%;
+      height: 300px;
+    }
+  }
+  .title-text {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    .course-title {
+      font-family: sans-serif;
+      color: #505050;
+      margin-bottom: 20px
+    }
+    .breadcrumb {
+      justify-content: center;
+      .breadcrumb-item a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+}
+.list-group-numbered {
+  .list-group-item.active {
+    background-color: #899db2;
+    border-color: #899db2;
+  }
+}
+
+.course-card {
+  height: 18rem;
+  .card-text {
+    height: 4rem;
+    font-size: smaller;
+  }
+}
+
+.nav-tabs {
+  .nav-item {
+    .nav-link.active {
+      color: #495057;
+    }
+    .nav-link {
+      color: #198754;
+    }
+  }
+}
+.job-card {
+  height: 15rem;
+  .card-text {
+    height: 4rem;
+    font-size: smaller;
+  }
+  .card-subtitle {
+    font-size: 12px;
+  }
+  .apply-btn, .applied {
+    position: absolute;
+    bottom: 0;
+  }
+}

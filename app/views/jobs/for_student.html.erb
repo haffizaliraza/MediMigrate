@@ -1,0 +1,21 @@
+<%= render 'layouts/content_header', content_header: 'Jobs', path: nil %>
+<hr class="mt-0 mx-3">
+<div class="content">
+  <ul class="nav nav-tabs" id="jobsTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="all-jobs-tab" data-bs-toggle="tab" data-bs-target="#all-jobs" type="button" role="tab" aria-controls="all-jobs" aria-selected="true">All Jobs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="applied-jobs-tab" data-bs-toggle="tab" data-bs-target="#applied-jobs" type="button" role="tab" aria-controls="applied-jobs" aria-selected="false">Applied Jobs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="available-jobs-tab" data-bs-toggle="tab" data-bs-target="#available-jobs" type="button" role="tab" aria-controls="available-jobs" aria-selected="false">Available Jobs</button>
+    </li>
+  </ul>
+</div>
+
+<div class="tab-content" id="jobsTabContent">
+  <%= render partial: 'tab_content', locals: { jobs: @jobs, current_tab: 'all-jobs', tab_id: 'all-jobs' } %>
+  <%= render partial: 'tab_content', locals: { jobs: @applied_jobs, current_tab: 'applied-jobs', tab_id: 'applied-jobs' } %>
+  <%= render partial: 'tab_content', locals: { jobs: @available_jobs, current_tab: 'available-jobs', tab_id: 'available-jobs' } %>
+</div>

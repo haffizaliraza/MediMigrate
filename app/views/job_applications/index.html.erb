@@ -1,0 +1,51 @@
+<%= render 'layouts/content_header', content_header: 'Job Applications', path: nil %>
+
+<div class="content">
+  <div class="card mx-3">
+    <div class="card-body table-responsive p-0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Applicant Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Assigned To</th>
+            <th scope="col">Status</th>
+            <!-- <th scope="col">Resume</th> -->
+            <th scope="col" class="text-center action-col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @job_applications.size != 0 %>
+            <% @job_applications.each do |job_application| %>
+              <tr>
+                <td><%= job_application.student.name %></td>
+                <td><%= job_application.phone %></td>
+                <td><%= job_application.job.title %></td>
+                <td><%= job_application.employer ? job_application.employer.title : '-' %></td>
+                <td><span class="badge text-light <%= application_status[job_application.status.to_sym] %> p-1"><%= job_application.status.to_s.humanize %></span></td>
+                <!-- <td><%#= link_to "View Resume", job_application.resume_url, target: '_blank' if job_application.resume.present? %></td> -->
+                <td class="d-flex align-items-center justify-content-center">
+                  <%= link_to job_application_path(job_application), class: 'mx-2 btn btn-sm btn-secondary text-white' do %>
+                    <i class="fas fa-eye"></i>
+                  <% end %>
+                  <%= button_to job_application_path(job_application), method: :delete, form: { data: { turbo_confirm: 'Are you sure you want to delete?' } }, class: 'mx-2 btn btn-sm btn-danger' do %>
+                    <i class="fa-solid fa-trash"></i>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="5" class="text-center text-secondary py-5">No Records Found</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="content d-flex justify-content-center mx-3 mt-4">
+  <%= paginate @job_applications %>
+</div>
+

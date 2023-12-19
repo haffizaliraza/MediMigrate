@@ -1,0 +1,49 @@
+<div class="content">
+  <div class="content-header p-3 mt-2">
+    <div class="d-flex justify-content-between mb-2">
+      <h4 class="m-0 text-dark">Job Application Detail</h4>
+      <div>
+        <%= link_to 'Accept', accept_job_application_path(@job_application), class: 'mx-1' unless @job_application.accepted? %>
+        <%= link_to 'Reject', reject_job_application_path(@job_application), class: 'mx-1' unless @job_application.rejected? %>
+      </div>
+    </div>
+  </div>
+  <div class="card mx-3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-9 my-auto">
+          <div class="row mt-4 my-auto">
+            <div class="col-12 row">
+              <strong class="col-md-6 col-sm-10">Student Name:</strong>
+              <p><%= @job_application.student.name %></p>
+            </div>
+            <div class="col-12 row">
+              <strong class="col-md-6 col-sm-10">Email:</strong>
+              <p><%= @job_application.student.email %></p>
+            </div>
+            <div class="col-12 row">
+              <strong class="col-md-6 col-sm-10">Phone:</strong>
+              <p><%= @job_application.phone %></p>
+            </div>
+            <div class="col-12 row">
+              <strong class="col-md-6 col-sm-10">Job Title:</strong>
+              <p><%= @job_application.job.title %></p>
+            </div>
+            <div class="col-12 row">
+              <strong class="col-md-6 col-sm-10">Applied at:</strong>
+              <p><%= @job_application.created_at %></p>
+            </div>
+            <div class="col-12 row">
+              <strong class="col-md-6 col-sm-10">Cover Letter:</strong>
+              <p><%= @job_application.cover_letter %></p>
+            </div>
+            <div class="col-12 row">
+              <strong class="col-md-6 col-sm-10">Status:</strong>
+              <p><%= @job_application.status.to_s.humanize %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

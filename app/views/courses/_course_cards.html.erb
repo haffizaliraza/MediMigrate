@@ -1,0 +1,31 @@
+<% courses.each do |course| %>
+  <% item_in_cart =  current_user.cart_items.pluck(:course_id).include?(course.id) %>
+  <% cart_button_text = item_in_cart ? 'Remove from Cart' : 'Add to Cart' %>
+  <div class="col" data-controller='toggle-published' data-url='<%= toggle_cart_course_path(course) %>'>
+    <div class="card course-card shadow-sm my-4">
+      <div class="card-body">
+        <h4 class="card-title"><%= course.name %></h4>
+        <h5 class="card-subtitle my-3"><span class="badge rounded-pill bg-info text-dark">$ <%= course.price %></span></h5>
+        <div class="card-text truncate-3-lines my-4 text-secondary"><%= course.description.to_plain_text %></div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <% unless current_user.purchased_courses.pluck(:course_id).include?(course.id) %>
+              <button type="button" class="btn btn-sm <%= item_in_cart ? 'btn-danger' : 'btn-primary' %>" data-status="<%= cart_button_text %>" data-action="click->toggle-published#toggleCart"><%= cart_button_text %></button>
+            <% else %>
+              <%= link_to current_chapter_path(course), class: 'btn btn-sm btn-success' do %>
+                <%= current_user.purchased_courses.find_by(course_id: course.id).chapters.present? ? 'Continue' : 'Start Course' %>
+              <% end %>
+            <% end %>
+          </div>
+          <div>
+            <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#courseModal-<%= course.id %>">
+              View Course
+            </button>
+          </div>
+        </div>
+          <div class="fs-6 fst-italic mt-3">Completed <%= course_status(course.id) %>%</div>
+      </div>
+    </div>
+    <%= render 'detail_modal', course: course, item_in_cart: item_in_cart, cart_button_text: cart_button_text  %>
+  </div>
+<% end %>

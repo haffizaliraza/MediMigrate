@@ -1,0 +1,18 @@
+<aside class="main-sidebar bg-light">
+  <div class="brand-link">
+    <div class="profile-element text-center">
+      <span>
+        <a href="<%= root_path %>">
+          <%= image_tag 'logo.webp' %>
+        </a>
+      </span>
+    </div>
+  </div>
+  <div class="sidebar rounded-4 mt-4 ml-1">
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <%= render "layouts/shared/#{current_user_sidebar(current_user)}", nav_item: nav_items(current_user) %>
+      </ul>
+    </nav>
+  </div>
+</aside>

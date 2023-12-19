@@ -1,0 +1,16 @@
+<div class="main-header align-items-center justify-content-between">
+	<h4 class="ps-2">Welcome <%= user.name %></h4>
+	<div class="d-flex">
+		<% if current_user.student? %>
+			<%= button_to checkout_courses_path, data: { turbo: false }, class: "mx-2 btn checkout-button btn-sm btn-primary", disabled: !(current_user.cart_items.length > 0) do %>
+				<i class="fa-solid fa-credit-card"></i>
+			<% end %>
+		<% end %>
+		<%= link_to edit_profile_user_path(current_user), class: 'btn btn-sm btn-secondary' do %>
+			<i class="fa-solid fa-user-pen"></i>
+		<% end %>
+		<%= button_to destroy_user_session_path, method: :delete, form: { data: { turbo_confirm: 'Are you sure you want to logout?' } }, class: 'mx-2 btn btn-sm btn-danger' do %>
+			<i class="fa-solid fa-right-from-bracket"></i>
+		<% end %>
+	</div>
+</div>

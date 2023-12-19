@@ -1,0 +1,49 @@
+/*
+ * Provides a drop-in pointer for the default Trix stylesheet that will format the toolbar and
+ * the trix-editor content (whether displayed or under editing). Feel free to incorporate this
+ * inclusion directly in any other asset bundle and remove this file.
+ *
+ *= require trix
+*/
+
+/*
+ * We need to override trix.css’s image gallery styles to accommodate the
+ * <action-text-attachment> element we wrap around attachments. Otherwise,
+ * images in galleries will be squished by the max-width: 33%; rule.
+*/
+.trix-content .attachment-gallery > action-text-attachment,
+.trix-content .attachment-gallery > .attachment {
+  flex: 1 0 33%;
+  padding: 0 0.5em;
+  max-width: 33%;
+}
+
+.trix-content .attachment-gallery.attachment-gallery--2 > action-text-attachment,
+.trix-content .attachment-gallery.attachment-gallery--2 > .attachment, .trix-content .attachment-gallery.attachment-gallery--4 > action-text-attachment,
+.trix-content .attachment-gallery.attachment-gallery--4 > .attachment {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+
+.trix-content action-text-attachment .attachment {
+  padding: 0 !important;
+  max-width: 100% !important;
+}
+
+trix-toolbar .trix-button-group--file-tools {
+  display: none;
+}
+trix-toolbar .trix-button--icon-underline::before {
+  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20clip-path%3D%22url(%23clip0)%22%3E%3Cpath%20d%3D%22M5.07143%206.125H6.14286V11.4375C6.14286%2014.3667%208.54621%2016.75%2011.5%2016.75C14.4538%2016.75%2016.8571%2014.3667%2016.8571%2011.4375V6.125H17.9286C18.0707%206.125%2018.2069%206.06903%2018.3074%205.9694C18.4078%205.86977%2018.4643%205.73465%2018.4643%205.59375V4.53125C18.4643%204.39035%2018.4078%204.25523%2018.3074%204.1556C18.2069%204.05597%2018.0707%204%2017.9286%204H13.1071C12.9651%204%2012.8288%204.05597%2012.7283%204.1556C12.6279%204.25523%2012.5714%204.39035%2012.5714%204.53125V5.59375C12.5714%205.73465%2012.6279%205.86977%2012.7283%205.9694C12.8288%206.06903%2012.9651%206.125%2013.1071%206.125H14.1786V11.4375C14.1786%2012.142%2013.8964%2012.8176%2013.394%2013.3158C12.8917%2013.8139%2012.2104%2014.0938%2011.5%2014.0938C10.7896%2014.0938%2010.1083%2013.8139%209.60596%2013.3158C9.10363%2012.8176%208.82143%2012.142%208.82143%2011.4375V6.125H9.89286C10.0349%206.125%2010.1712%206.06903%2010.2717%205.9694C10.3721%205.86977%2010.4286%205.73465%2010.4286%205.59375V4.53125C10.4286%204.39035%2010.3721%204.25523%2010.2717%204.1556C10.1712%204.05597%2010.0349%204%209.89286%204H5.07143C4.92935%204%204.79309%204.05597%204.69262%204.1556C4.59216%204.25523%204.53571%204.39035%204.53571%204.53125V5.59375C4.53571%205.73465%204.59216%205.86977%204.69262%205.9694C4.79309%206.06903%204.92935%206.125%205.07143%206.125ZM18.4643%2018.875H4.53571C4.39363%2018.875%204.25737%2018.931%204.15691%2019.0306C4.05644%2019.1302%204%2019.2654%204%2019.4062V20.4688C4%2020.6096%204.05644%2020.7448%204.15691%2020.8444C4.25737%2020.944%204.39363%2021%204.53571%2021H18.4643C18.6064%2021%2018.7426%2020.944%2018.8431%2020.8444C18.9436%2020.7448%2019%2020.6096%2019%2020.4688V19.4062C19%2019.2654%2018.9436%2019.1302%2018.8431%2019.0306C18.7426%2018.931%2018.6064%2018.875%2018.4643%2018.875Z%22%20fill%3D%22black%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3CclipPath%20id%3D%22clip0%22%3E%3Crect%20width%3D%2215%22%20height%3D%2217%22%20fill%3D%22white%22%20transform%3D%22translate(4%204)%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3C%2Fsvg%3E");
+}
+fieldset:disabled trix-editor {
+  background-color: gray;
+  cursor: not-allowed;
+}
+.comments figure.attachment {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}

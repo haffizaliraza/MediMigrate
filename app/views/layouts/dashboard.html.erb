@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lms</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "dashboard", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "jquery" %>
+  </head>
+
+  <body data-scrollbar-auto-hide="n" class="hold-transition admin">
+    <div id="flash" class="position-absolute" style="z-index: 1040;right: 10px; top: 10px;">
+      <%= render 'layouts/notice' %>
+    </div>
+    <div class="wrapper">
+      <%= render 'layouts/shared/side_bar' if user_signed_in? %>
+
+      <div class="<%= 'content-wrapper' if user_signed_in? %>">
+        <%= render 'layouts/shared/header', user: current_user if user_signed_in? %>
+        <%= yield %>
+      </div>
+    </div>
+
+    <footer class="main-footer ml-0 text-center footer-fixed">
+      <strong>Copyright &copy; <%= Date.today.year %> <a href="<%= root_path %>">LMS</a>.</strong> All rights reserved.
+    </footer>
+  </body>
+</html>

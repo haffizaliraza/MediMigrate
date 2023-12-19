@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <% if chapter.lessons.length > 0 %>
+        <% chapter.lessons.each do |lesson| %>
+          <div class="mb-3 border border-3 rounded shadow p-3">
+            <div class="text-success">
+              <h4 class="fw-bold"><%= lesson.title %></h4>
+            </div>
+            <hr />
+            <div class="p-2">
+              <% if lesson.text? %>
+                <p><%= lesson.content %></p>
+              <% elsif lesson.video? %>
+                <% if lesson.file.attached? %>
+                  <% if lesson.file.content_type.include?('image') %>
+                    <%= image_tag lesson.file, class: 'video-thumbnail' %>
+                  <% else %>
+                    <%= video_tag url_for(lesson.file), controls: true, class: 'video-thumbnail' %>
+                  <% end %>
+                <% end %>
+              <% elsif lesson.interactive_video? %>
+                <p><strong>Zoom URL:</strong> <%= link_to "#{lesson.url}", lesson.url, target: '_blank' %></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-center text-secondary py-5">No Content Found</p>
+      <% end %>
+    </div>
+  </div>
+  <% unless mark_chapter_id(purchased_course).blank? %>
+    <%= link_to 'Mark as Complete', course_path(id: chapter.course_id, chapter_id: next_chapter_id(purchased_course), mark_chapter_id: mark_chapter_id(purchased_course)), class: 'btn btn-success btn-sm mt-4' %>
+  <% end %>
+</div>

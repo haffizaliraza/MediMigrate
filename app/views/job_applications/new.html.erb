@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="container-fluid form-wrapper">
+    <%= render 'job_detail', job: @job %>
+    <%= form_with model: @job_application, class: "mt-5 apply-form", html: { 'data-parsley-validate': true } do |f| %>
+      <div class="h2 py-2 mb-4 text-dark border-bottom text-center">Apply for Job</div>
+      <div class="row justify-content-center">
+        <%= hidden_field_tag :job_id, params[:job_id] %>
+        <%= f.hidden_field :student_id, value: current_user.id %>
+        <div class="col col-md-8 col-sm-8">
+          <%= f.label :phone, clas: "mb-2" %><span> *</span>
+          <%= f.text_field :phone, class: "form-control py-3", required: true, placeholder: "Enter phone no." %>
+        </div>
+        <div class="form-group mt-4 col-8">
+          <%= f.label :cover_letter, clas: "mb-2" %><span> *</span><br>
+          <p class="cover-note">Please don't copy from any source and also mention your experience and projects.</p>
+          <%= f.text_area :cover_letter, class: "form-control", required: true, rows: 10 %>
+        </div>
+        <div class="my-4 apply-job-btn text-center">
+          <%= f.submit 'Apply', data: { turbo: false }, class: 'btn btn-success' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

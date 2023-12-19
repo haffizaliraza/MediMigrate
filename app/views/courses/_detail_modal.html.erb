@@ -1,0 +1,29 @@
+<div class="modal fade" id="courseModal-<%= course.id %>" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="courseModalLabel"><%= course.name %></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% if course.chapters.length > 0 %>
+          <ol class="list-group list-group-numbered">
+            <% course.chapters.each do |chapter| %>
+              <li class="list-group-item"><%= chapter.title %></li>
+              <ol class="my-2 ms-2 list-group list-group-numbered">
+                <% chapter.lessons.each do |lesson| %>
+                  <li class="list-group-item"><%= lesson.title %></li>
+                <% end %>
+              </ol>
+            <% end %>
+          </ol>
+        <% else %>
+          <p class="text-center">No Chapter & Lesson Found</p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<%= render 'layouts/content_header', content_header: header, path: nil %>
+<div class="content">
+  <%= form_with model: @user, url: path, method: method, class: 'form' do |f| %>
+    <div class="card my-5 p-3">
+      <div class="card-body">
+        <h4>User Profile</h4>
+        <hr>
+        <div class="row">
+          <div class="col-sm-7 mb-3 form-group">
+            <%= f.label :name %><span class="text-danger">*</span>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class:'form-control', placeholder:'Enter Name' %>
+            <span class="text-danger"><%= @user.errors.full_messages_for(:name).join(', ') if @user.present? %></span>
+          </div>
+          <div class="col-sm-7 mb-3 form-group">
+            <%= f.label :email %><span class="text-danger">*</span>
+            <%= f.email_field :email, autocomplete: "email", class:'form-control', placeholder:'Enter Email' %>
+            <span class="text-danger"><%= @user.errors.full_messages_for(:email).join(', ') if @user.present? %></span>
+          </div>
+
+          <div class="col-sm-7 mb-3 form-group">
+            <%= f.label :type, "User Role" %>
+            <%= f.select :type, options_for_select(User.fetch_descendants, user.type), {}, class: "form-control" %>
+            <span class="text-danger"><%= @user.errors.full_messages_for(:type).join(', ') if @user.present? %></span>
+          </div>
+
+          <div class="col-sm-7 mb-3 form-group">
+            <%= f.label :status %><span class="text-danger">*</span>
+            <%= f.select :status, options_for_select(User::STATUSES.map{ |key, value| [key.to_s.titleize, key] }, user.status), {}, class: "form-control" %>
+            <span class="text-danger"><%= @user.errors.full_messages_for(:status).join(', ') if @user.present? %></span>
+          </div>
+
+          <% unless @user.persisted? %>
+            <div class="col-sm-7 mb-3 form-group">
+              <%= f.label :password %><span class="text-danger">*</span>
+              <%= f.password_field :password, autocomplete: "current-password", class:'form-control', placeholder:'Enter Password' %>
+              <span class="text-danger"><%= @user.errors.full_messages_for(:password).join(', ') if @user.present? %></span>
+            </div>
+
+            <div class="col-sm-7 mb-3 form-group">
+              <%= f.label :password_confirmation %><span class="text-danger">*</span>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'form-control', placeholder:'Confirm Password' %>
+              <span class="text-danger"><%= @user.errors.full_messages_for(:password_confirmation).join(', ') if @user.present? %></span>
+            </div>
+          <% end %>
+        </div>
+        <%= f.submit 'Save', class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+<div class="course-detail">
+  <div class="title-img">
+    <%= image_tag 'title_img.jpeg', alt: 'Description of the image' %>
+  </div>
+  <div class="title-text">
+    <h1 class="course-title"><%= course.name %></h1>
+  </div>
+  <div class="m-3 p-3 shadow-sm" style="background-color: #f3f8f9">
+    <div class="p-4 text-secondary">
+      <%= course.description %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<% jobs.each do |job| %>
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= job.title %></h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary"><%= job.job_type %> | <%= job.location %></h6>
+        <p class="card-text"><%= truncate_words(job.description.to_plain_text) %></p>
+        <% unless current_user.job_applications.pluck(:job_id).include?(job.id) %>
+          <%= link_to new_job_application_path(job_id: job.slug), class: 'card-link btn btn-sm btn-success' do %>
+            Apply
+          <% end %>
+        <% else %>
+          <p class="text-body-secondary m-2">Already Applied!</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

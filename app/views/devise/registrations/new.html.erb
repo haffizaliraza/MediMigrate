@@ -1,0 +1,25 @@
+<div class="login-wrapper">
+  <div class="bg-white container rounded p-3 pb-5 shadow text-center w-25">
+      <div class="py-3">LMS</div>
+      <%= form_for(resource, as: resource_name, url: user_registration_path, html: { class: 'mb-3 form-signin', id: 'login-form' }) do |f| %>
+        <div class="my-3">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", placeholder: "Enter your Name", required: true %>
+        </div>
+        <div class="my-3">
+          <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "Enter your email address", required: true %>
+        </div>
+        <div class="mb-3">
+          <%= f.password_field :password, class: "form-control", placeholder: "Enter password", required: true %>
+        </div>
+        <div class="mb-3">
+          <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Enter password confirmation", required: true %>
+        </div>
+        <%= f.hidden_field :type, value: 'Student' %>
+        <div class="mb-3">
+          <%= f.submit "Sign up", class: 'btn btn-dark btn-block btn-lg' %>
+        </div>
+      <% end %>
+      <%= link_to "Log in", new_session_path(resource_name) %><br />
+  </div>
+</div>
+

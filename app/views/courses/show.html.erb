@@ -1,0 +1,27 @@
+<div class="content">
+  <%= render 'course_detail', course: @purchased_course.course %>
+  <div class="p-4 elevation-3 rounded-lg">
+    <div class="row">
+      <div class="col-sm-3 me-2">
+        <h4 class="mt-2">Chapters List</h4>
+        <% if @purchased_course.course.chapters.length > 0 %>
+          <%= render 'chapters_list', purchased_course: @purchased_course %>
+        <% else %>
+          <p class="mt-2 text-center">Coming Soon</>
+        <% end %>
+      </div>
+      <div class="col-sm-9 border-start row">
+        <div class="col-sm-10 text-start">
+        </div>
+        <div class="col-sm-2 text-end my-auto">
+          <%= render 'progress_bar', purchased_course: @purchased_course %>
+        </div>
+        <div class="col-sm-12">
+          <div class="h-100">
+            <%= render 'chapter_content', chapter: @chapter, purchased_course: @purchased_course %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

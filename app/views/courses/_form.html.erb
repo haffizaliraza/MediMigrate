@@ -1,0 +1,47 @@
+<%= render 'layouts/content_header', content_header: header, path: nil %>
+<div class="content">
+  <%= form_with model: @course, url: path, method: method, class: 'form' do |f| %>
+    <div class="card mx-3 my-5 p-3">
+      <div class="card-body">
+        <h4>Course</h4>
+        <hr>
+        <div class="row">
+          <div class="col-sm-7 mb-3 form-group">
+            <%= f.label :name %><span class="text-danger">*</span>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class:'form-control', placeholder:'Enter Name' %>
+            <span class="text-danger"><%= @course.errors.full_messages_for(:name).join(', ') if @course.present? %></span>
+          </div>
+
+          <div class="col-sm-7 mb-3 form-group">
+            <%= f.label :description %>
+            <%= f.rich_text_area :description, placeholder:'Enter Description', class: 'form-control' %>
+            <span class="text-danger"><%= @course.errors.full_messages_for(:description).join(', ') if @course.present? %></span>
+          </div>
+
+          <div class="col-sm-7 mb-3 form-group">
+            <%= f.label :status %>
+            <%= f.select :status, Course.statuses.keys.map { |s| [s.humanize, s] }, { include_blank: false }, class: "form-control" %>
+            <span class="text-danger"><%= @course.errors.full_messages_for(:status).join(', ') if @course.present? %></span>
+          </div>
+
+          <div class="col-sm-7 mb-3 form-group">
+            <%= f.label :price %>
+            <%= f.text_field :price, class:'form-control', placeholder:'Enter Course Price' %>
+            <span class="text-danger"><%= @course.errors.full_messages_for(:price).join(', ') if @course.present? %></span>
+          </div>
+        </div>
+
+        <div class="col-sm-12 mb-3 form-group">
+          <%= f.fields_for :chapters do |chapter_form| %>
+            <%= render 'courses/chapter_fields', f: chapter_form %>
+          <% end %>
+        </div>
+        <div class="links mt-3">
+          <%= link_to_add_association "Add Chapters", f, :chapters, class:'btn btn-primary' %>
+        </div>
+        <%= f.submit 'Save', data: { turbo: false }, class: 'btn btn-primary mt-3' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

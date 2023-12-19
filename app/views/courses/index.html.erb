@@ -1,0 +1,51 @@
+<%= render 'layouts/content_header', content_header: 'Courses', path: new_course_path %>
+<div class="content">
+  <div class="m-3">
+    <div class="row text-center">
+      <div class="col-sm-9 col-lg-12">
+        <div class="table-responsive elevation-1">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%if @courses.size !=0 %>
+                <% @courses&.each do |course| %>
+                  <tr>
+                    <td><%= course.id %></td>
+                    <td><%= course.name.titleize %></td>
+                    <td><%= course.description.to_plain_text.truncate(15) %></td>
+                    <td><%= course.price %></td>
+                    <td><%= course.status&.titleize %></td>
+                    <td class="d-flex align-items-center justify-content-center">
+                      <%= link_to edit_course_path(course), class: 'mx-2 btn btn-sm btn-secondary text-white' do %>
+                        <i class="fas fa-pencil-alt"></i>
+                      <% end %>
+                      <%= button_to course_path(course), method: :delete, form: { data: { turbo_confirm: 'Are you sure you want to delete?' } }, class: 'mx-2 btn btn-sm btn-danger' do %>
+                        <i class="fa-solid fa-trash"></i>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td colspan="6" class="text-center text-secondary py-5">No Records Found</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content d-flex justify-content-center mx-3 mt-4">
+  <%= paginate @courses %>
+</div>
